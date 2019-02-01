@@ -3,12 +3,13 @@ import PokeCell from './PokeCell';
 import { pokeClasses } from '../helpers/pokeClasses'
 import './styles/PokeList.css'
 
-const PokeList = () => {
+const PokeList = ({ handleOnClick }) => {
   const pokemons = pokeClasses.map(pokeClass => {
     return(
       <PokeCell
         key={pokeClass.id}
         pokeClass={pokeClass}
+        handleOnClick={handleOnClick}
       />
     );
   });
