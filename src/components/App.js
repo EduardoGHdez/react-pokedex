@@ -7,7 +7,7 @@ import './styles/App.css';
 class App extends Component {
   constructor () {
     super();
-    this.state = {};
+    this.state = { pokemon: {} };
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
@@ -15,7 +15,7 @@ class App extends Component {
     console.log(id);
     fetch(`http://pokeapi.co/api/v2/pokemon/${id}/`).then( res => res.json() ).then( data => {
       const pokemon = new Pokemon(data);
-      console.log(pokemon);
+      this.setState({ pokemon });
     }).catch(err => console.log(err));
 
   }
@@ -25,7 +25,7 @@ class App extends Component {
     return (
       <div className="App">
         <PokeList handleOnClick={this.handleOnClick}/>
-        <DetailView />
+        <DetailView pokemon={this.state.pokemon}/>
       </div>
     );
   }
