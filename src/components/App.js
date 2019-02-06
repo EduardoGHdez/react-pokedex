@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PokeList from './PokeList';
 import DetailView from './DetailView';
 import Pokemon from '../helpers/Pokemon'
 import './styles/App.css';
+
+
 
 class App extends Component {
   constructor () {
@@ -13,11 +16,14 @@ class App extends Component {
 
   handleOnClick(id){
     console.log(id);
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`).then( res => res.json() ).then( data => {
-      const pokemon = new Pokemon(data);
-      this.setState({ pokemon });
-    }).catch(err => console.log(err));
 
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+      .then( res => {
+        const pokemon = new Pokemon(res.data);
+        this.setState({ pokemon })
+      } ).catch( err => {
+        console.log(err);
+      } );
   }
 
 
